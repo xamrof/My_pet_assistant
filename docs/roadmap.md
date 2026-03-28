@@ -13,9 +13,9 @@
 ## ETAPA 1: Lo Básico (Prueba de Concepto)
 
 ### Fase 1: Setup del Proyecto Base
-- [ ] Ejecutar `npm create tauri-app@latest` (Seleccionar React + JS/TS).
-- [ ] Ejecutar `npm install`.
-- [ ] Ejecutar `npm run tauri dev` para validar la ventana.
+- [✅] Ejecutar `npm create tauri-app@latest` (Seleccionar React + JS/TS).
+- [✅] Ejecutar `npm install`.
+- [✅] Ejecutar `npm run tauri dev` para validar la ventana.
 
 ### Fase 2: Configuración de Tailwind CSS v3
 - [ ] Ejecutar `npm install -D tailwindcss@3 postcss autoprefixer`.
