@@ -12,9 +12,11 @@
   "app": {
     "windows": [
       {
-        "title": "pet",
+        "title": "my_pet_assistant",
         "width": 800,
-        "height": 600
+        "height": 600,
+        "decorations": false,
+        "transparent": true
       }
     ],
     "security": {
