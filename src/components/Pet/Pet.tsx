@@ -4,6 +4,8 @@ import { DialogBubble } from '../UI/DialogBubble'
 import { getCurrentWindow } from '@tauri-apps/api/window'
 import { ContextMenu } from '../UI/ContextMenu'
 
+import petAvatar from '../../assets/fenrir.png'
+
 export const Pet: React.FC = () => {
     const {mode, message, showMessage, fetchNews, isMenuOpen, toggleMenu} = usePetStore()
 
@@ -50,7 +52,15 @@ export const Pet: React.FC = () => {
                 onContextMenu={handleContextMenu} 
                 className={`${getPetColor()} w-24 h-24 rounded-2xl shadow-2xl flex items-center justify-center text-white font-bold select-none transition-colors duration-500 transform hover:scale-110 cursor-pointer`}
             >
-                {mode === 'talking' ? '💬' : mode === 'thinking' ? '⏳' : '🐺'}
+                {mode === 'thinking' && <span className="absolute -top-4 -right-4 text-2xl animate-bounce">⏳</span>}
+                {mode === 'talking' && <span className="absolute -top-4 -right-4 text-2xl animate-pulse">💬</span>}
+                <img 
+                    src={petAvatar}
+                    alt="My Assistant" 
+                    className='w-32 h-32 object-contain drop-shadow-2xl'
+                    draggable={false}
+                />
+
             </div>
         </div>
     )

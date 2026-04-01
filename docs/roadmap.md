@@ -55,30 +55,33 @@
 - [✅] Actualizar el Store (`usePetStore.ts`) para manejar peticiones asíncronas.
 - [✅] Implementar un menú contextual (clic derecho) en el componente `Pet.tsx` para pedir noticias.
 
-### Fase 6: Pulido y Empaquetado
+---
 
-- [ ] Implementar la lógica en Rust (`main.rs`) para el *click-through*.
-- [ ] Configurar el icono de la aplicación.
-- [ ] 🔒 Revisar advertencias de seguridad del compilador de Rust.
-- [ ] Ejecutar `npm run tauri build` para compilar el ejecutable.
+## ETAPA 3: El Asistente Inteligente (Integración LLM Segura) 🧠
+*Objetivo: Dotar al asistente de IA generativa para retos de cualquier tema, protegiendo las credenciales mediante estándares OWASP.*
+
+### Fase 7: La Bóveda de Credenciales (Tauri + Rust)
+
+- [ ] Instalar el plugin oficial `tauri-plugin-store` (para guardar configuraciones) o integración con OS Keychain.
+- [ ] Crear el componente `SettingsModal.tsx` en React para ingresar la API Key.
+- [ ] Escribir el comando (Command) en Rust `save_api_key` para encriptar y guardar la llave fuera del alcance del frontend.
+
+### Fase 8: El Proxy Interno de IA (Rust)
+
+- [ ] Añadir dependencias en `Cargo.toml` (`reqwest` para peticiones HTTP y `serde_json`).
+- [ ] Escribir el comando en Rust `generate_ai_challenge` que lea la llave segura, construya el prompt (ej. *"Genera un reto corto sobre [TEMA]"*) y haga la petición a la API del LLM.
+- [ ] Sanitizar la respuesta de la IA dentro de Rust antes de enviarla al frontend.
+
+### Fase 9: Expansión de la Interfaz (React)
+
+- [ ] Añadir submenús en el `ContextMenu.tsx` (Ej: "Reto de Código", "Reto de Lógica", "Dato Curioso").
+- [ ] Conectar el store de Zustand para que llame a los comandos de Rust (`invoke('generate_ai_challenge')`) en lugar del servicio estático.
+- [ ] (Opcional) Implementar un pequeño input de texto en el globo de diálogo para hacerle preguntas directas al asistente.
 
 ---
 
-## ETAPA 3: Proyecto Completo (Webapp y Sincronización)
+## ETAPA 4: Pulido, Empaquetado y Distribución 📦
 
-### Fase 7: Arquitectura Webapp
-
-- [ ] Refactorizar la lógica de Tauri (`window.__TAURI__`) para usar *feature flags*, evitando errores si se abre en navegador.
-- [ ] Desplegar frontend en Vercel/Netlify configurando cabeceras de seguridad HTTP (HSTS, X-Frame-Options).
-
-### Fase 8: Backend Seguro (Deno + Turso)
-
-- [ ] Inicializar servidor Deno.
-- [ ] Configurar Turso (SQLite).
-- [ ] 🔒 Implementar validación estricta de entradas (Input Validation) en todos los endpoints de Deno.
-- [ ] 🔒 Implementar CORS restrictivo en el servidor para que solo acepte peticiones de tu app local/webapp.
-
-### Fase 9 y 10: Animaciones Avanzadas e IA
-
-- [ ] Reemplazar GIFs por *Sprite Sheet* animado con CSS steps.
-- [ ] 🔒 Si se integra una API de LLM (ej. Gemini), manejar la *API Key* exclusivamente desde el entorno de Rust o Deno, nunca desde React.
+- [ ] Añadir un Sprite Sheet animado (CSS steps) en lugar de colores sólidos.
+- [ ] Configurar el ícono oficial de la aplicación (`icon.ico`, `icon.icns`).
+- [ ] Compilar el ejecutable final (`npm run tauri build`).

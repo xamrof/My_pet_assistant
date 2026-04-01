@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { fetchTechNews } from "../services/api.devto";
+import { fetchDailyChallenge } from "../services/api.challenges";
 
 export type PetMode = "idle" | "talking" | "sleeping" | "thinking";
 
@@ -7,17 +8,21 @@ interface PetState {
     mode: PetMode;
     message: string;
     isMenuOpen: boolean;
+    isSettingsOpen: boolean;
     setMode: (mode: PetMode) => void;
     showMessage: (text: string, duration?: number ) => void;
     clearMessage: () => void;
     fetchNews: () => Promise<void>
     toggleMenu: (isOpen: boolean) => void
+    fetchChallenge: () => Promise<void>
+    toggleSettings: (isOpen: boolean) => void;
 }
 
 export const usePetStore = create<PetState>((set, get) => ({
     mode: "idle",
     message: "",
     isMenuOpen: false,
+    isSettingsOpen: false,
 
     setMode: (mode) => set({ mode }),
     showMessage: (text, duration = 5000) => {
@@ -38,5 +43,13 @@ export const usePetStore = create<PetState>((set, get) => ({
         get().showMessage(newMessage, 8000)
     },
 
-    toggleMenu: (isOpen) => set({isMenuOpen: isOpen})
+    toggleMenu: (isOpen) => set({isMenuOpen: isOpen}),
+    toggleSettings: (isOpen) => set({isSettingsOpen: isOpen, isMenuOpen: false}),
+
+    fetchChallenge: async () => {
+        set({message: "Generando tu reto de hoy...", mode: 'thinking', isMenuOpen: false})
+        const challengeMessage = await fetchDailyChallenge()
+
+        get().showMessage(challengeMessage, 10000)
+    }
 }));
